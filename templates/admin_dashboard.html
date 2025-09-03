@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+</head>
+<body>
+<h2>Admin Dashboard</h2>
+<a href="{{ url_for('admin_logout') }}">Logout</a>
+
+<h3>Subscribers</h3>
+<table border="1" cellpadding="8">
+<tr><th>ID</th><th>Name</th><th>Email</th><th>Subscribed At</th></tr>
+{% for sub in subscribers %}
+<tr>
+<td>{{ sub.id }}</td>
+<td>{{ sub.name }}</td>
+<td>{{ sub.email }}</td>
+<td>{{ sub.subscribed_at }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Send Email to All Subscribers</h3>
+<form method="POST" action="{{ url_for('send_email') }}">
+<input type="text" name="subject" placeholder="Subject" required><br><br>
+<textarea name="message" placeholder="Message" rows="5" cols="40" required></textarea><br><br>
+<button type="submit">Send Email</button>
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <p>{{ messages[0] }}</p>
+  {% endif %}
+{% endwith %}
+</body>
+</html>

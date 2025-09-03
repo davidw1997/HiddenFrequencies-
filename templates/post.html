@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>{{ post.title }}</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #2c3e50; color: white; }
+  header { text-align: center; margin-bottom: 30px; }
+  .daily-quote { font-weight: bolder; color: gold; border-bottom: 2px solid white; margin-bottom: 20px; padding-bottom: 5px; display:block; }
+  .post-content { background: #34495e; padding: 20px; border-radius: 10px; }
+  img { max-width: 100%; height: auto; margin-top: 10px; border-radius:6px; }
+  a { color: #1abc9c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .b2p{font-weight:lighter;  }
+</style>
+</head>
+<body>
+<header>
+  <p class="daily-quote"><em>Daily Quote:</em> {{ quote }}</p>
+  <h1>{{ post.title }}</h1>
+</header>
+
+<div class="post-content">
+  {% if post.image %}
+  <img src="{{ url_for('static', filename=post.image) }}" alt="Blog Image">
+  {% endif %}
+  <p>{{ post.content }}</p>
+</div>
+
+<p class="b2p" ><a href="{{ url_for('blog') }}">← Back to all posts</a></p>
+
+</body>
+</html>

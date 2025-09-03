@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidden Frequencies</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Modal Background */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1000; 
+      left: 0; 
+      top: 0; 
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.6); 
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background: #fff;
+      margin: 10% auto; 
+      padding: 20px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .close {
+      color: #333;
+      float: right;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: red;
+    }
+
+    .modal-content input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .modal-content button {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      margin-top: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background: #555;
+    }
+
+    .quote-box {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 20px;
+      color: ghostwhite;
+    }
+
+    /* Flash Message */
+    .flash-message {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      z-index: 2000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      display: none;
+    }
+    .flash-success { background: #28a745; }
+    .flash-error { background: #dc3545; }
+  </style>
+</head>
+<body>
+  <h1 class="hfh1">Hidden Frequencies</h1>
+
+  <!-- Daily Quote -->
+  <div class="quote-box">
+    <p>"{{ quote }}"</p>
+  </div>
+
+  <!-- Flash Message -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div id="flashMessage" class="flash-message">{{ messages[0] }}</div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="container">
+    <!-- Floating Bubbles (Links) -->
+    <a href="/book" class="bubble link">Book</a>
+    <a href="/music" class="bubble link">Music</a>
+    <a href="/blog" class="bubble link">Blog</a>
+    <a href="javascript:void(0)" class="bubble link" id="subscribeBtn">Subscribe</a>
+
+    <!-- Firefly Bubbles -->
+    {% for i in range(20) %}
+    <div class="bubble firefly"></div>
+    {% endfor %}
+  </div>
+
+  <!-- Modal Form -->
+  <div id="subscribeModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Subscribe</h2>
+      <form action="/subscribe" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <button type="submit">Join Newsletter</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Get elements
+    const modal = document.getElementById("subscribeModal");
+    const btn = document.getElementById("subscribeBtn");
+    const closeBtn = document.getElementById("closeModal");
+    const flash = document.getElementById("flashMessage");
+
+    // Open modal
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // Close modal
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // Close if clicked outside
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Show flash message for 3 seconds
+    if (flash) {
+      flash.style.display = "block";
+      setTimeout(() => { flash.style.display = "none"; }, 3000);
+    }
+  </script>
+</body>
+</html>

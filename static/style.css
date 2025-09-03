@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: url("forest-bg.png") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.hfh1{
+color: white;
+font-weight: lighter; 
+position: absolute;
+top: 300px;
+}
+
+
+/* Container */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main bubble links */
+.bubble.link {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+    transition: transform 0.3s, background 0.3s;
+    animation: drift 12s ease-in-out infinite alternate;
+}
+
+/* Hover effect */
+.bubble.link:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+/* Random positions for the 3 bubbles */
+.bubble.link:nth-child(1) { top: 20%; left: 15%; animation-duration: 10s; }
+.bubble.link:nth-child(2) { top: 50%; left: 70%; animation-duration: 12s; }
+.bubble.link:nth-child(3) { top: 75%; left: 35%; animation-duration: 14s; }
+
+/* Drift animation (moves gently in all directions) */
+@keyframes drift {
+    0%   { transform: translate(0px, 0px); }
+    25%  { transform: translate(20px, -15px); }
+    50%  { transform: translate(-15px, 20px); }
+    75%  { transform: translate(10px, -10px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+/* Fireflies */
+.bubble.firefly {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 150, 0.8);
+    box-shadow: 0 0 12px rgba(255, 255, 200, 0.9);
+    animation: glow 2s infinite alternate, drift 16s linear infinite alternate;
+}
+
+/* Glow animation */
+@keyframes glow {
+    from { opacity: 0.6; }
+    to   { opacity: 1; }
+}
+
+/* Firefly random placement */
+.bubble.firefly:nth-child(odd) { left: 10%; top: 20%; }
+.bubble.firefly:nth-child(even) { left: 70%; top: 60%; }
+.bubble.firefly:nth-child(3n) { left: 40%; top: 80%; }
+.bubble.firefly:nth-child(5n) { left: 80%; top: 30%; }
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .bubble.link {
+        width: 85px;
+        height: 85px;
+        font-size: 0.85rem;
+    }
+}
