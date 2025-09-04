@@ -12,7 +12,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "supersecretkey")
 
 # Connect to MariaDB using environment variables for Render deployment
 db = MySQLdb.connect(
-    host=os.environ.get("DB_HOST", "localhost"),
+    host=os.environ.get("DB_HOST", "959126b9555dce1e519e37d26881ce99"),
     user=os.environ.get("DB_USER", "root"),
     passwd=os.environ.get("DB_PASSWORD",""),
     db=os.environ.get("DB_NAME", "hidden_frequencies")
