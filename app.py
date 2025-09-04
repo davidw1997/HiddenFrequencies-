@@ -14,7 +14,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "supersecretkey")
 db = MySQLdb.connect(
     host=os.environ.get("DB_HOST", "localhost"),
     user=os.environ.get("DB_USER", "root"),
-    passwd=os.environ.get("DB_PASSWORD", ""),
+    passwd=os.environ.get("DB_PASSWORD",""),
     db=os.environ.get("DB_NAME", "hidden_frequencies")
 )
 
@@ -172,4 +172,4 @@ def send_email():
 # -------------------- Run Server --------------------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7700))
-    app.run(debug=False, host="0.0.0.0", port=port)
+    app.run(debug=False, host="0.0.0.0", port=7700)
