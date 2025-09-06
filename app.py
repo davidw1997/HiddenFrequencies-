@@ -12,14 +12,28 @@ def get_db_connection():
         host=os.environ.get("DB_HOST", "dpg-d2th67vdiees7388k8l0-a"),  # Render internal hostname
         database=os.environ.get("DB_NAME", "hidden_frequenciesdb"),
         user=os.environ.get("DB_USER", "root"),
-        password=os.environ.get("DB_PASSWORD", "your-password-here"),  # Replace with your real password in .env or Render Dashboard
+        password=os.environ.get("DB_PASSWORD", "your-password-here"),  # Replace with Render secret
         port=os.environ.get("DB_PORT", "5432")
     )
     return conn
 
+# -------------------- Routes --------------------
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/videos")
+def videos():
+    return render_template("videos.html")
+
+@app.route("/blog")
+def blog():
+    return render_template("blog.html")
+
+@app.route("/book")
+def book():
+    return render_template("book.html")
 
 @app.route("/submit", methods=["POST"])
 def submit():
